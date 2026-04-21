@@ -114,22 +114,26 @@
       <div class="service-card">
         <div class="service-icon"><i class="fas fa-code"></i></div>
         <h3>Web Development</h3>
-        <p>Full front-end builds from concept to deployment. Semantic HTML, modern CSS,
-          and JavaScript-powered interactions that are fast and accessible.</p>
+        <p>Full-stack web applications built from concept to deployment. Clean, semantic HTML, modern CSS, and JavaScript-powered interactions — fast, accessible, and optimized for every device.</p>
       </div>
 
       <div class="service-card">
         <div class="service-icon"><i class="fa-brands fa-wordpress"></i></div>
-        <h3>WordPress Themes</h3>
-        <p>Custom WordPress theme development tailored to your brand — built for
-          content editors, optimised for SEO, and easy to maintain long-term.</p>
+        <h3>WordPress & CMS</h3>
+        <p>Custom WordPress theme development tailored to your brand. Built for content editors, optimized for SEO, and easy to maintain long-term. No page builder bloat.
+        </p>
       </div>
 
       <div class="service-card">
-        <div class="service-icon"><i class="fas fa-layer-group"></i></div>
-        <h3>Landing Pages</h3>
-        <p>High-converting, mobile-first landing pages built to drive results.
-          Clean design, clear messaging, and attention to every detail.</p>
+        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3>AI-Assisted Development</h3>
+        <p>Faster delivery without cutting corners. I integrate AI tools like GitHub Copilot and Claude into my workflow to accelerate builds, improve code quality, and solve problems smarter.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-universal-access"></i></div>
+        <h3>Responsive & Accessible Web Apps</h3>
+        <p>Mobile-first builds that meet WCAG and ADA/AODA accessibility standards. Because good web apps work for everyone, on every screen.</p>
       </div>
 
     </div>
@@ -148,9 +152,7 @@
         <span class="section-label">Expertise</span>
         <h2 class="section-title">My skill set</h2>
         <p class="skills-description">
-          A curated stack built for modern front-end work —
-          from vanilla HTML &amp; CSS through to React,
-          PHP, and the tools teams use every day.
+          Building modern, data-driven web applications using clean UI, API integrations, and AI-assisted workflows — focused on delivering scalable and efficient user experiences.
         </p>
       </div>
 
@@ -160,22 +162,29 @@
           <h4><i class="fas fa-code"></i> &nbsp;Technical</h4>
           <?php
           $tech_skills = [
-            'HTML5',
-            'CSS / SCSS',
-            'JavaScript / jQuery',
             'React',
-            'PHP',
-            'WordPress',
-            'Bootstrap 5',
-            'REST API',
-            'Node.js',
-            'Git / GitHub',
+            'JavaScript (ES6+)',
+            'HTML5, CSS / SCSS',
+            'API Integration (REST APIs, JSON data)',
+            'Responsive Design & Mobile Optimization',
+            'AI-assisted development (prompt engineering, debugging, code generation)',
+            'CMS Development (WordPress)',
+
+            'Asynchronous JavaScript (fetch, async/await)',
+            'Version Control (Git & GitHub)',
+            'UI Frameworks (Bootstrap) (Tailwind CSS)',
+            'JavaScript runtimes (Node.js — working knowledge)'
+
           ];
           foreach ($tech_skills as $skill) {
             echo '<div class="skill-item"><span class="skill-dot"></span>' . esc_html($skill) . '</div>';
           }
           ?>
         </div>
+
+
+
+
 
         <div class="skills-group">
           <h4><i class="fas fa-laptop-code"></i> &nbsp;Tools</h4>
@@ -215,10 +224,7 @@
         <span class="section-label">Work</span>
         <h2 class="section-title" style="margin-bottom: 0">Latest Projects</h2>
       </div>
-      <a href="https://github.com/enorddev" target="_blank" rel="noopener"
-        class="btn-outline reveal" style="transition-delay: 0.1s; white-space: nowrap;">
-        View GitHub &rarr;
-      </a>
+
     </div>
 
     <?php
@@ -239,18 +245,25 @@
     // Fallback static projects if CPT has no entries yet
     $static_projects = [
       [
-        'title' => 'Grant Miller Dealership Website',
+        'title' => 'Walker Marine & RV ',
         'tag'   => 'Web Development',
         'desc'  => 'Full dealership website with inventory listings, lead capture, and responsive design.',
-        'url'   => 'https://www.grantmillermotors.com/',
-        'img'   => '',
+        'url'   => 'https://walkermarineandrv.com/',
+        'img'   =>  get_template_directory_uri() . '/images/walker_thumb_1.png',
       ],
       [
-        'title' => 'Stouffville Nissan Website',
+        'title' => 'PMC Sales Equipment & Irrigation',
+        'tag'   => 'Web Development',
+        'desc'  => 'Full dealership website with inventory listings, lead capture, and responsive design.',
+        'url'   => 'https://pmcsales.ca/',
+        'img'   =>  get_template_directory_uri() . '/images/pmc_thumb_1.png',
+      ],
+      [
+        'title' => 'HB Cycle',
         'tag'   => 'Web Development',
         'desc'  => 'Dealership web presence with custom design, SEO-optimised structure, and mobile-first layout.',
-        'url'   => 'https://www.stouffvillenissan.com/',
-        'img'   => '',
+        'url'   => 'https://hbcycle.com/',
+        'img'   =>  get_template_directory_uri() . '/images/hbcycle_thumb.png',
       ],
       [
         'title' => 'Subaru of Muskoka',
@@ -297,10 +310,10 @@
           ?>
           <article class="project-card reveal">
             <div class="project-thumb">
-              <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('large'); ?>
+              <?php if (!empty($p['img'])) : ?>
+                <img src="<?php echo esc_url($p['img']); ?>" alt="<?php echo esc_attr($p['title']); ?>">
               <?php else : ?>
-                <div class="project-thumb-placeholder"><?php echo esc_html($tag ?: 'Project'); ?></div>
+                <div class="project-thumb-placeholder"><?php echo esc_html($p['tag']); ?></div>
               <?php endif; ?>
             </div>
             <div class="project-info">
@@ -321,7 +334,11 @@
         <?php foreach ($static_projects as $i => $p) : ?>
           <article class="project-card reveal" style="transition-delay: <?php echo $i * 0.07; ?>s">
             <div class="project-thumb">
-              <div class="project-thumb-placeholder"><?php echo esc_html($p['tag']); ?></div>
+              <?php if (!empty($p['img'])) : ?>
+                <img src="<?php echo esc_url($p['img']); ?>" alt="<?php echo esc_attr($p['title']); ?>">
+              <?php else : ?>
+                <div class="project-thumb-placeholder"><?php echo esc_html($p['tag']); ?></div>
+              <?php endif; ?>
             </div>
             <div class="project-info">
               <span class="project-tag"><?php echo esc_html($p['tag']); ?></span>
